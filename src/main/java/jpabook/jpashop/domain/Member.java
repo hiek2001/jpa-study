@@ -16,6 +16,8 @@ public class Member { // @Table 옵션의 index도 넣고, @Column의 length 제
    @Column(name = "USERNAME")
    private String username;
 
+   private int age;
+
     // 응집성 있게 활용 가능함
    // 주소
    @Embedded
@@ -90,15 +92,15 @@ public class Member { // @Table 옵션의 index도 넣고, @Column의 length 제
     public void setUsername(String username) {
         this.username = username;
     }
-//
-//    public int getAge() {
-//        return age;
-//    }
-//
-//    public void setAge(int age) {
-//        this.age = age;
-//    }
-//
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
     public void setTeam(Team team) {
     }
 

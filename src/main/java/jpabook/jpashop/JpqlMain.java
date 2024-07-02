@@ -54,13 +54,29 @@ public class JpqlMain {
             //List<MemberDTO> result2 = em.createQuery("select new jpql.MemberDTO(m.username, m.age) from Member m", MemberDTO.class).getResultList();
 
             // 페이징 -> ORDER BY 반드시!
-            List<Member> members = em.createQuery("select m from Member m order by m.age desc", Member.class)
-                    .setFirstResult(0)
-                    .setMaxResults(10)
-                    .getResultList();
+//            List<Member> members = em.createQuery("select m from Member m order by m.age desc", Member.class)
+//                    .setFirstResult(0)
+//                    .setMaxResults(10)
+//                    .getResultList();
+//
+//            for(Member member1 : members) {
+//                System.out.println("member1 = "+member1);
+//            }
 
-            for(Member member1 : members) {
-                System.out.println("member1 = "+member1);
+            Member member1 = new Member();
+            member1.setUsername("관리자");
+            em.persist(member1);
+
+            Member member2 = new Member();
+            member2.setUsername("사용자");
+            em.persist(member2);
+
+            String query = "select function('group_concat', m.username) From Member m";
+            // String query = "select group_concat(m.username) From Member m";
+            List<String> result = em.createQuery(query, String.class)
+                            .getResultList();
+            for (String s : result) {
+                System.out.println("s = "+s); // 관리자, 사용자 한줄로 출력됨
             }
 
             tx.commit();
